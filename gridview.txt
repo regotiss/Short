@@ -1,0 +1,109 @@
+<asp:GridView ID="GridView1" HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+    runat="server" AutoGenerateColumns="false" OnSelectedIndexChanged = "OnSelectedIndexChanged">
+    <Columns>
+        <asp:BoundField DataField="Id" HeaderText="Id" ItemStyle-Width="30" />
+        <asp:BoundField DataField="Name" HeaderText="Name" ItemStyle-Width="150" />
+        <asp:TemplateField HeaderText="Country">
+            <ItemTemplate>
+                <asp:Label ID="lblCountry" Text='<%# Eval("Country") %>' runat="server" />
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:LinkButton Text="Select" ID="lnkSelect" runat="server" CommandName="Select" />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+<br />
+<table cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="width: 100px">
+            Id
+        </td>
+        <td>
+            <asp:TextBox ID="txtId" runat="server" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Name
+        </td>
+        <td>
+            <asp:TextBox ID="txtName" runat="server" />
+        </td>
+    </tr>
+        <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Country
+        </td>
+        <td>
+            <asp:TextBox ID="txtCountry" runat="server" />
+        </td>
+    </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////
+Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+    If Not IsPostBack Then
+        Dim dt As New DataTable()
+        dt.Columns.AddRange(New DataColumn(1) {New DataColumn("Item"), New DataColumn("Quantity")})
+        dt.Rows.Add("Shirt", 145)
+        dt.Rows.Add("Jeans", 0)
+        dt.Rows.Add("Trousers", 190)
+        dt.Rows.Add("Tie", 30)
+        dt.Rows.Add("Cap", 0)
+        dt.Rows.Add("Hat", 90)
+        dt.Rows.Add("Scarf", 290)
+        dt.Rows.Add("Belt", 150)
+        GridView1.DataSource = dt
+        GridView1.DataBind()
+    End If
+End Sub

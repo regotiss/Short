@@ -1,0 +1,43 @@
+Private Sub HasRows(ByVal connection As SqlConnection)
+    Using connection
+        Dim command As SqlCommand = New SqlCommand( _
+          "SELECT CategoryID, CategoryName FROM Categories;", _
+          connection)
+        connection.Open()
+
+        Dim reader As SqlDataReader = command.ExecuteReader()
+
+        If reader.HasRows Then 
+            Do While reader.Read()
+                Console.WriteLine(reader.GetInt32(0) _
+                  & vbTab & reader.GetString(1))
+            Loop 
+        Else
+            Console.WriteLine("No rows found.")
+        End If
+
+        reader.Close()
+    End Using 
+End Sub
+
+
+
+
+                       //mail sending code
+
+
+ Dim frm, body, to1, pass, subject As String
+                            frm = "suvarnabedge@gmail.com"
+                            pass = "passive555"
+                            to1 = em
+                            subject = "about registration"
+                            body = "congratulations your registration for advertise is successfull"
+                            Dim mail As MailMessage = New MailMessage(frm, to1, subject, body)
+                            mail.IsBodyHtml = False
+                            Dim auth As New Net.NetworkCredential(frm, pass)
+                            Dim mailclient As SmtpClient = New SmtpClient("smtp.gmail.com", 587)
+                            mailclient.EnableSsl = True
+                            mailclient.UseDefaultCredentials = False
+                            mailclient.Credentials = auth
+                            mailclient.Send(mail)
+                            lbl.Text = "mail send successfully"
